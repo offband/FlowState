@@ -1,0 +1,12 @@
+id: ai-builder
+type: runtime_stack
+title: AI Builder Runtime
+extends: []
+layers:
+  - product-direction
+  - python-standards
+  - planning-flow
+  - prd-enforcement
+  - review-flow
+  - deployment-standards
+  - github-issues-resolution

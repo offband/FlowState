@@ -1,0 +1,4 @@
+runtime = "flow://ai-builder"
+endpoint = "http://localhost:7777/mcp"
+auth_env = "FLOW_RUNTIME_TOKEN"
+source_of_truth = "FlowState Runtime Endpoint"
