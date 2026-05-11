@@ -52,7 +52,7 @@ flow serve ai-builder
 The MCP endpoint is:
 
 ```text
-http://localhost:7777/mcp/
+http://127.0.0.1:7777/mcp/
 ```
 
 ## 4. Configure Codex MCP
@@ -61,7 +61,7 @@ Use Streamable HTTP:
 
 ```text
 Name: FlowState Runtime
-URL: http://localhost:7777/mcp/
+URL: http://127.0.0.1:7777/mcp/
 Bearer token env var: FLOW_RUNTIME_TOKEN
 ```
 
@@ -84,7 +84,7 @@ Example:
 
 ```toml
 runtime = "flow://ai-builder"
-endpoint = "http://localhost:7777/mcp/"
+endpoint = "http://127.0.0.1:7777/mcp/"
 auth_env = "FLOW_RUNTIME_TOKEN"
 source_of_truth = "FlowState Runtime Endpoint"
 ```

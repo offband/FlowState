@@ -19,7 +19,6 @@ from .store import RuntimeStoreError, list_stacks
 
 class BearerAuthMiddleware(BaseHTTPMiddleware):
     allowed_origins = {
-        "http://localhost",
         "http://127.0.0.1",
         "http://[::1]",
         "null",
