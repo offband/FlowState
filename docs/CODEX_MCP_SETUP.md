@@ -36,7 +36,7 @@ flow serve ai-builder
 The MCP endpoint is:
 
 ```text
-http://localhost:7777/mcp
+http://localhost:7777/mcp/
 ```
 
 ## 4. Configure Codex MCP

@@ -25,7 +25,7 @@ Configure Codex as a Streamable HTTP MCP server:
 
 ```toml
 [mcp_servers.flowRuntime]
-url = "http://localhost:7777/mcp"
+url = "http://localhost:7777/mcp/"
 bearer_token_env_var = "FLOW_RUNTIME_TOKEN"
 ```
 
