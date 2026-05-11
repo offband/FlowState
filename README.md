@@ -13,7 +13,7 @@ Runtime Objects -> Runtime Stack -> Runtime Endpoint -> Codex / Cursor / Claude
 ## Quick Demo
 
 ```bash
-pipx install .
+pipx install git+https://github.com/offband/flowstate.git
 
 flow init
 flow examples install
