@@ -6,7 +6,7 @@ from pathlib import Path
 
 RUNTIME_HOME_ENV = "FLOWSTATE_HOME"
 TOKEN_ENV = "FLOW_RUNTIME_TOKEN"
-DEFAULT_ENDPOINT = "http://localhost:7777/mcp"
+DEFAULT_ENDPOINT = "http://localhost:7777/mcp/"
 
 
 def runtime_home() -> Path:

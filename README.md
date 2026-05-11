@@ -17,8 +17,22 @@ pipx install git+https://github.com/offband/flowstate.git
 
 flow init
 flow examples install
-export FLOW_RUNTIME_TOKEN="$(flow auth token)"
+launchctl setenv FLOW_RUNTIME_TOKEN "$(flow auth token)"
 flow serve ai-builder
+```
+
+For Codex Desktop on macOS, prefer `launchctl setenv` because GUI apps do not reliably inherit shell environment variables. `launchctl` is macOS-specific and persists the token for GUI apps launched after the value is set.
+
+For temporary shell-local auth in the current terminal only:
+
+```bash
+export FLOW_RUNTIME_TOKEN="$(flow auth token)"
+```
+
+To clean up the macOS GUI token:
+
+```bash
+launchctl unsetenv FLOW_RUNTIME_TOKEN
 ```
 
 Configure Codex as a Streamable HTTP MCP server:
@@ -43,6 +57,13 @@ The project now contains:
 ```
 
 Agents read the attachment, connect to the MCP endpoint, and retrieve the active Runtime Stack.
+
+Troubleshooting:
+
+- The MCP URL must end with `/mcp/`.
+- Codex may require a full restart after auth changes.
+- `flow serve ai-builder` must be actively serving while Codex resolves runtime context.
+- A missing `FLOW_RUNTIME_TOKEN` prevents runtime resolution.
 
 ## Why
 

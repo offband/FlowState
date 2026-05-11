@@ -21,8 +21,8 @@ def test_server_requires_bearer_token(monkeypatch, tmp_path: Path) -> None:
     app = create_app("project-alpha")
 
     with TestClient(app) as client:
-        unauthorized = client.get("/mcp")
-        authorized = client.get("/mcp", headers={"Authorization": f"Bearer {token}"})
+        unauthorized = client.get("/mcp/")
+        authorized = client.get("/mcp/", headers={"Authorization": f"Bearer {token}"})
 
     assert unauthorized.status_code == 401
     assert authorized.status_code != 401
@@ -61,7 +61,7 @@ def test_mcp_streamable_http_client_can_fetch_runtime(monkeypatch, tmp_path: Pat
     thread.start()
     try:
         _wait_for_server(server)
-        payload = anyio.run(_fetch_runtime, f"http://127.0.0.1:{port}/mcp", token)
+        payload = anyio.run(_fetch_runtime, f"http://127.0.0.1:{port}/mcp/", token)
     finally:
         server.should_exit = True
         thread.join(timeout=5)

@@ -21,10 +21,26 @@ flow init
 flow examples install
 ```
 
-## 2. Export The Runtime Token
+## 2. Set The Runtime Token
+
+For Codex Desktop on macOS, set the token in the GUI launch environment:
+
+```bash
+launchctl setenv FLOW_RUNTIME_TOKEN "$(flow auth token)"
+```
+
+`launchctl setenv` is macOS-specific. It is the preferred Codex Desktop workflow because GUI apps do not reliably inherit shell environment variables.
+
+For temporary shell-local auth in the current terminal only:
 
 ```bash
 export FLOW_RUNTIME_TOKEN="$(flow auth token)"
+```
+
+To remove the macOS GUI token:
+
+```bash
+launchctl unsetenv FLOW_RUNTIME_TOKEN
 ```
 
 ## 3. Start The Runtime Server
@@ -45,7 +61,7 @@ Use Streamable HTTP:
 
 ```text
 Name: FlowState Runtime
-URL: http://localhost:7777/mcp
+URL: http://localhost:7777/mcp/
 Bearer token env var: FLOW_RUNTIME_TOKEN
 ```
 
@@ -68,7 +84,7 @@ Example:
 
 ```toml
 runtime = "flow://ai-builder"
-endpoint = "http://localhost:7777/mcp"
+endpoint = "http://localhost:7777/mcp/"
 auth_env = "FLOW_RUNTIME_TOKEN"
 source_of_truth = "FlowState Runtime Endpoint"
 ```
@@ -100,3 +116,11 @@ The MCP server also exposes prompts:
 - `use_runtime_context`
 - `review_with_runtime`
 - `plan_with_runtime`
+
+## Troubleshooting
+
+- The MCP URL must end with `/mcp/`.
+- Codex may require a full restart after auth changes.
+- The FlowState runtime server must be actively serving, for example with `flow serve ai-builder`.
+- A missing `FLOW_RUNTIME_TOKEN` prevents runtime resolution.
+- `export FLOW_RUNTIME_TOKEN=...` only affects the current shell and child processes from that shell; use `launchctl setenv ...` for persistent macOS GUI auth.

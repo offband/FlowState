@@ -15,6 +15,8 @@ def test_cli_init_and_examples(monkeypatch, tmp_path: Path, capsys) -> None:
     output = capsys.readouterr().out
     assert "Initialized FlowState runtime home" in output
     assert "Installed example runtime pack" in output
+    assert 'launchctl setenv FLOW_RUNTIME_TOKEN "$(flow auth token)"' in output
+    assert "Temporary shell-local auth" in output
     assert "AI Builder Runtime" in output
     assert "GitHub Issue Resolution" in output
 
@@ -47,6 +49,9 @@ def test_cli_codex_install_and_drift(monkeypatch, tmp_path: Path, capsys) -> Non
     output = capsys.readouterr().out
     assert "Add to Codex MCP config" in output
     assert "flowRuntime" in output
+    assert 'url = "http://localhost:7777/mcp/"' in output
+    assert 'launchctl setenv FLOW_RUNTIME_TOKEN "$(flow auth token)"' in output
+    assert "launchctl unsetenv FLOW_RUNTIME_TOKEN" in output
     assert '"stack_id": "ai-builder"' in output
     assert "status: ok" in output
 
@@ -67,7 +72,7 @@ def test_cli_bootstrap_inspect_rejects_invalid_runtime(monkeypatch, tmp_path: Pa
     context_dir = repo / ".flow"
     context_dir.mkdir(parents=True)
     (context_dir / "context.toml").write_text(
-        'runtime = "http://example.com/nope"\nendpoint = "http://localhost:7777/mcp"\n',
+        'runtime = "http://example.com/nope"\nendpoint = "http://localhost:7777/mcp/"\n',
         encoding="utf-8",
     )
 

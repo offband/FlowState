@@ -37,7 +37,7 @@ class BearerAuthMiddleware(BaseHTTPMiddleware):
 
 
 def create_mcp(default_stack: str | None = None) -> FastMCP:
-    mcp = FastMCP("FlowState Runtime", stateless_http=True, json_response=True)
+    mcp = FastMCP("FlowState Runtime", stateless_http=True, json_response=True, streamable_http_path="/mcp/")
 
     @mcp.tool()
     def list_runtime_stacks() -> list[dict[str, object]]:

@@ -148,7 +148,10 @@ def dispatch(args: argparse.Namespace) -> None:
         home = ensure_home()
         token = ensure_token()
         print(f"Initialized FlowState runtime home: {home}")
-        print(f"Bearer token: export {TOKEN_ENV}={token}")
+        print("Codex Desktop on macOS needs GUI auth:")
+        print(f"launchctl setenv {TOKEN_ENV} \"$(flow auth token)\"")
+        print("Temporary shell-local auth:")
+        print(f"export {TOKEN_ENV}={token}")
     elif args.command == "auth":
         if args.auth_command == "rotate":
             print(rotate_token())
@@ -270,7 +273,14 @@ def handle_codex(args: argparse.Namespace) -> None:
         print(f"Wrote {instruction_path}")
     print("\nAdd to Codex MCP config:\n")
     print(config, end="")
-    print(f'\nExport token:\nexport {args.auth_env}="$(flow auth token)"')
+    print(
+        "\nPersistent macOS GUI auth for Codex Desktop:\n"
+        f'launchctl setenv {args.auth_env} "$(flow auth token)"\n\n'
+        "Temporary shell-local auth:\n"
+        f'export {args.auth_env}="$(flow auth token)"\n\n'
+        "Cleanup macOS GUI auth:\n"
+        f"launchctl unsetenv {args.auth_env}"
+    )
 
 
 def handle_validate(args: argparse.Namespace) -> None:
