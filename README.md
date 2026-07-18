@@ -143,3 +143,7 @@ operational context.
 ```
 
 Runtime Objects are plain Markdown. Runtime Stacks are YAML. Project attachments are TOML.
+
+## Releases
+
+FlowState release notes are tracked in [CHANGELOG.md](CHANGELOG.md). Check the changelog before upgrading an installed `flow` CLI because runtime stack format, MCP serving behavior, and attachment layout are part of the public operational surface.
